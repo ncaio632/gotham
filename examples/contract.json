@@ -1,0 +1,8 @@
+{
+  "case_id": "example-001",
+  "channel": "support",
+  "reported_issue": "example issue",
+  "verification_state": "unverified",
+  "owner": "support-team",
+  "reply_state": "draft"
+}
