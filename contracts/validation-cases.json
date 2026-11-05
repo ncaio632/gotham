@@ -1,0 +1,20 @@
+[
+  {
+    "schema": "contracts/case-review.schema.json",
+    "instance": "examples/review.valid.json",
+    "valid": true,
+    "purpose": "Structurally valid synthetic human-reviewed draft."
+  },
+  {
+    "schema": "contracts/case-review.schema.json",
+    "instance": "examples/review.invalid-schema.json",
+    "valid": false,
+    "purpose": "Must reject verified claim with empty evidence_refs."
+  },
+  {
+    "schema": "contracts/case-review.schema.json",
+    "instance": "examples/review.invalid-semantic.json",
+    "valid": true,
+    "purpose": "Schema-valid self-review of a stale draft; domain must reject SELF_REVIEW and STALE_REVIEW."
+  }
+]

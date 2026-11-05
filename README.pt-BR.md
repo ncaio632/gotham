@@ -1,30 +1,23 @@
-![gotham](assets/header.svg)
-
 # gotham
 
-### Fluxo de respostas de atendimento
+Atendimento fundamentado em fatos.
 
-[English](README.md) · [Português (Brasil)](README.pt-BR.md) · [日本語](README.ja.md)
+[English](README.md) · [Português](README.pt-BR.md) · [日本語](README.ja.md)
 
+Especificação de atendimento que conecta contexto dos casos, fatos verificados e respostas revisadas.
 
-Método estruturado para transformar uma reclamação em resposta específica ao contexto, com responsável operacional explícito.
+## Comece aqui
+
+[Manual de implementação](engineering/index.pt-BR.md)
+
+## Documentação
+
+- [Arquitetura e invariantes](docs/architecture.pt-BR.md)
+- [Contratos e exemplos sintéticos](docs/contracts.pt-BR.md)
+- [Decisões e consequências](docs/decisions.pt-BR.md)
+- [Critérios de validação](docs/validation.pt-BR.md)
+- [Instruções dos agentes](AGENTS.md) · [Papéis dos agentes](agents/)
 
 ## Escopo
 
-Fluxo editorial e contratos de referência. Não se afirma a existência de envio autônomo, integração de chamados ou SLA medido.
-
-## Notas de engenharia
-
-- [Arquitetura e invariantes](docs/architecture.pt-BR.md)
-- [Contratos de dados](docs/contracts.pt-BR.md)
-- [Registro de decisão técnica](docs/decisions.pt-BR.md)
-- [Estratégia de validação](docs/validation.pt-BR.md)
-- [Exemplo sintético de contrato](examples/contract.json)
-
-## Guia de leitura
-
-Comece pela arquitetura, consulte o exemplo de contrato e depois leia o compromisso da decisão e a matriz de validação. Os cenários descrevem o que deve ser verificado; não afirmam que uma implementação pública executável passou nesses testes.
-
-## Limite da publicação
-
-Esta edição técnica exclui cadastros privados, exportações de contas, caminhos da máquina, conversas e objetos históricos de backup. O acervo operacional original permanece um ativo privado separado.
+Documentação de engenharia e artefatos sintéticos de referência. Comportamentos propostos, tarefas de implementação e evidências observadas são identificados separadamente. Os agentes dependem de invocação deliberada; a sincronização não chama modelos de IA.

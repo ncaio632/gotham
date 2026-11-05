@@ -1,0 +1,90 @@
+{
+  "schema_version": "1.0",
+  "case_ref": "SYN-CASE-A",
+  "case_revision": 7,
+  "state": "approved",
+  "channel": "support_form",
+  "reported_issue": "Fictional report: status remains unclear after two unsuccessful attempts.",
+  "prior_attempts": [
+    {
+      "attempt_ref": "SYN-ATTEMPT-A",
+      "channel": "support_form",
+      "reported_outcome": "No acknowledged outcome reported."
+    },
+    {
+      "attempt_ref": "SYN-ATTEMPT-B",
+      "channel": "support_chat",
+      "reported_outcome": "Next owner not established, according to the report."
+    }
+  ],
+  "owner_role": "support-owner",
+  "claims": [
+    {
+      "claim_ref": "SYN-CLAIM-A",
+      "text": "The fictional customer reported two unsuccessful contact attempts.",
+      "status": "reported",
+      "evidence_refs": []
+    },
+    {
+      "claim_ref": "SYN-CLAIM-B",
+      "text": "A status inquiry is recorded in the synthetic fixture.",
+      "status": "verified",
+      "evidence_refs": [
+        "SYN-EVIDENCE-A"
+      ],
+      "verifier_role": "evidence-reviewer"
+    },
+    {
+      "claim_ref": "SYN-CLAIM-C",
+      "text": "The unresolved next step is assigned to the support owner for internal review in the synthetic fixture.",
+      "status": "verified",
+      "evidence_refs": [
+        "SYN-EVIDENCE-B"
+      ],
+      "verifier_role": "evidence-reviewer"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_ref": "SYN-EVIDENCE-A",
+      "source_kind": "synthetic_status_record",
+      "review_status": "reviewed"
+    },
+    {
+      "evidence_ref": "SYN-EVIDENCE-B",
+      "source_kind": "synthetic_status_record",
+      "review_status": "reviewed"
+    }
+  ],
+  "commitments": [],
+  "draft": {
+    "draft_revision": 2,
+    "author_role": "response-composer",
+    "sentences": [
+      {
+        "text": "You reported two unsuccessful support attempts.",
+        "claim_refs": [
+          "SYN-CLAIM-A"
+        ]
+      },
+      {
+        "text": "A status inquiry is recorded.",
+        "claim_refs": [
+          "SYN-CLAIM-B"
+        ]
+      },
+      {
+        "text": "The unresolved next step is assigned to the support owner for internal review.",
+        "claim_refs": [
+          "SYN-CLAIM-C"
+        ]
+      }
+    ]
+  },
+  "review": {
+    "decision": "approved",
+    "reviewer_role": "response-composer",
+    "case_revision": 7,
+    "draft_revision": 1
+  }
+}

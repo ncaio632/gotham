@@ -1,22 +1,23 @@
-![gotham](assets/header.svg)
-
 # gotham
 
-### カスタマーサポートの応答設計
+事実に基づくサポート。
 
-[English](README.md) · [Português (Brasil)](README.pt-BR.md) · [日本語](README.ja.md)
+[English](README.md) · [Português](README.pt-BR.md) · [日本語](README.ja.md)
 
-問い合わせの内容、確認状況、担当者、回答案の承認を分離する運用設計の資料です。
+案件の背景、確認済みの事実、レビューした回答を結び付けるサポート仕様です。
+
+## はじめに
+
+[実装手引き](engineering/index.ja.md)
 
 ## ドキュメント
 
-| 資料 | 内容 |
-| --- | --- |
-| [アーキテクチャ](docs/architecture.ja.md) | 処理の流れと不変条件 |
-| [データ契約](docs/contracts.ja.md) | 合成データによる構造例 |
-| [設計判断](docs/decisions.ja.md) | 判断の理由と影響 |
-| [検証方針](docs/validation.ja.md) | 確認項目と証拠の扱い |
+- [アーキテクチャと不変条件](docs/architecture.ja.md)
+- [データ契約と合成サンプル](docs/contracts.ja.md)
+- [設計判断と影響](docs/decisions.ja.md)
+- [検証基準](docs/validation.ja.md)
+- [エージェント指示](AGENTS.md) · [役割定義](agents/)
 
-## 公開範囲
+## 範囲
 
-この版は選別した技術資料です。実際の個人記録、内部の業務データ、認証情報、アカウントの画面、会話履歴、非公開バックアップのGit履歴は含みません。実装済みの範囲と設計上の提案を区別します。公開用の実行可能なアプリケーションや、本番環境での動作を保証するものではありません。
+エンジニアリング文書と合成サンプルです。提案した動作、実装タスク、観測した証拠を区別します。エージェントは明示的に呼び出し、同期処理はAIモデルを実行しません。

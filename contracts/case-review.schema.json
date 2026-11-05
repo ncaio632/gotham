@@ -1,0 +1,434 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:gotham:synthetic:case-review:1",
+  "title": "Proposed synthetic support review snapshot",
+  "description": "Preparation and human review only; no delivery capability is expressed.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "case_ref",
+    "case_revision",
+    "state",
+    "channel",
+    "reported_issue",
+    "prior_attempts",
+    "claims",
+    "evidence",
+    "commitments",
+    "review"
+  ],
+  "properties": {
+    "schema_version": {
+      "const": "1.0"
+    },
+    "case_ref": {
+      "type": "string",
+      "pattern": "^SYN-CASE-[A-Z0-9]+$"
+    },
+    "case_revision": {
+      "type": "integer",
+      "minimum": 1
+    },
+    "state": {
+      "enum": [
+        "intake",
+        "investigating",
+        "drafting",
+        "review_pending",
+        "revision_required",
+        "approved"
+      ]
+    },
+    "channel": {
+      "enum": [
+        "support_form",
+        "support_chat",
+        "manual"
+      ]
+    },
+    "reported_issue": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 500
+    },
+    "prior_attempts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "attempt_ref",
+          "channel",
+          "reported_outcome"
+        ],
+        "properties": {
+          "attempt_ref": {
+            "type": "string",
+            "pattern": "^SYN-ATTEMPT-[A-Z0-9]+$"
+          },
+          "channel": {
+            "enum": [
+              "support_form",
+              "support_chat",
+              "manual"
+            ]
+          },
+          "reported_outcome": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          }
+        }
+      }
+    },
+    "owner_role": {
+      "type": "string",
+      "pattern": "^[a-z][a-z-]+$"
+    },
+    "claims": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "claim_ref",
+          "text",
+          "status",
+          "evidence_refs"
+        ],
+        "properties": {
+          "claim_ref": {
+            "type": "string",
+            "pattern": "^SYN-CLAIM-[A-Z0-9]+$"
+          },
+          "text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 400
+          },
+          "status": {
+            "enum": [
+              "reported",
+              "verified",
+              "disputed",
+              "unknown"
+            ]
+          },
+          "evidence_refs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^SYN-EVIDENCE-[A-Z0-9]+$"
+            }
+          },
+          "verifier_role": {
+            "type": "string",
+            "pattern": "^[a-z][a-z-]+$"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "verified"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "verifier_role"
+              ],
+              "properties": {
+                "evidence_refs": {
+                  "minItems": 1
+                }
+              }
+            }
+          }
+        ]
+      }
+    },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "evidence_ref",
+          "source_kind",
+          "review_status"
+        ],
+        "properties": {
+          "evidence_ref": {
+            "type": "string",
+            "pattern": "^SYN-EVIDENCE-[A-Z0-9]+$"
+          },
+          "source_kind": {
+            "enum": [
+              "synthetic_status_record",
+              "synthetic_owner_agreement"
+            ]
+          },
+          "review_status": {
+            "enum": [
+              "unreviewed",
+              "reviewed",
+              "rejected"
+            ]
+          }
+        }
+      }
+    },
+    "commitments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "commitment_ref",
+          "action",
+          "status",
+          "owner_role"
+        ],
+        "properties": {
+          "commitment_ref": {
+            "type": "string",
+            "pattern": "^SYN-COMMITMENT-[A-Z0-9]+$"
+          },
+          "action": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 300
+          },
+          "status": {
+            "enum": [
+              "proposed",
+              "confirmed"
+            ]
+          },
+          "owner_role": {
+            "type": "string",
+            "pattern": "^[a-z][a-z-]+$"
+          },
+          "due_text": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 120
+          },
+          "evidence_ref": {
+            "type": "string",
+            "pattern": "^SYN-EVIDENCE-[A-Z0-9]+$"
+          }
+        },
+        "allOf": [
+          {
+            "if": {
+              "properties": {
+                "status": {
+                  "const": "confirmed"
+                }
+              }
+            },
+            "then": {
+              "required": [
+                "due_text",
+                "evidence_ref"
+              ]
+            }
+          }
+        ]
+      }
+    },
+    "draft": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "draft_revision",
+        "author_role",
+        "sentences"
+      ],
+      "properties": {
+        "draft_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "author_role": {
+          "type": "string",
+          "pattern": "^[a-z][a-z-]+$"
+        },
+        "sentences": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "text",
+              "claim_refs"
+            ],
+            "properties": {
+              "text": {
+                "type": "string",
+                "minLength": 1,
+                "maxLength": 500
+              },
+              "claim_refs": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "pattern": "^SYN-CLAIM-[A-Z0-9]+$"
+                }
+              },
+              "commitment_refs": {
+                "type": "array",
+                "uniqueItems": true,
+                "items": {
+                  "type": "string",
+                  "pattern": "^SYN-COMMITMENT-[A-Z0-9]+$"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "decision"
+      ],
+      "properties": {
+        "decision": {
+          "enum": [
+            "not_reviewed",
+            "changes_requested",
+            "approved"
+          ]
+        },
+        "reviewer_role": {
+          "type": "string",
+          "pattern": "^[a-z][a-z-]+$"
+        },
+        "case_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "draft_revision": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "reason_codes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "pattern": "^[A-Z][A-Z0-9_]+$"
+          },
+          "uniqueItems": true
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "enum": [
+                  "changes_requested",
+                  "approved"
+                ]
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "reviewer_role",
+              "case_revision",
+              "draft_revision"
+            ]
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "decision": {
+                "const": "changes_requested"
+              }
+            }
+          },
+          "then": {
+            "required": [
+              "reason_codes"
+            ],
+            "properties": {
+              "reason_codes": {
+                "minItems": 1
+              }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "enum": [
+              "drafting",
+              "review_pending",
+              "revision_required",
+              "approved"
+            ]
+          }
+        }
+      },
+      "then": {
+        "required": [
+          "owner_role",
+          "draft"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "state": {
+            "const": "approved"
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "review": {
+            "properties": {
+              "decision": {
+                "const": "approved"
+              }
+            }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "review": {
+            "properties": {
+              "decision": {
+                "enum": [
+                  "not_reviewed",
+                  "changes_requested"
+                ]
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
